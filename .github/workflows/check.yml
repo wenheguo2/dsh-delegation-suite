@@ -1,0 +1,37 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax-check all JS modules
+        shell: bash
+        run: |
+          set -e
+          for f in lib/*.js; do
+            echo "checking $f"
+            node --check "$f"
+          done
+      - name: Validate bundle manifest
+        shell: bash
+        run: |
+          node -e "
+            const p = require('./package.json');
+            if (!p.dsh || !p.dsh.bundle || !p.dsh.bundle.patch) {
+              console.error('missing dsh.bundle.patch declaration');
+              process.exit(1);
+            }
+            if (!p.peerDependencies || !p.peerDependencies['@deepseek-ai/dsh-tools']) {
+              console.error('missing @deepseek-ai peerDependencies');
+              process.exit(1);
+            }
+            console.log('bundle manifest OK');
+          "
