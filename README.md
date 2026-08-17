@@ -93,6 +93,10 @@ dsh plugin --profile web add github:<owner>/dsh-delegation-suite
 
 > **注意**：如果你之前手动在 `profiles/web/cordis.patch.yml` 里添加过 `delegation-ranker` / `policy-hint` / `preset-studio` 行，请先删除这些行再安装本包（同名工具/服务重复注册会冲突）。
 
+### 从源码安装的构建说明
+
+本包是纯 JavaScript（无 TypeScript 构建步骤），`lib/*.js` 即发布产物，因此 **git 安装不需要 `prepare` 脚本、也不触发 pnpm 的 `allowBuilds` 授权**——装完即可用。运行时依赖（`@deepseek-ai/dsh-tools` 等）以 peerDependencies 声明，解析到 harness 自身安装，不会产生独立副本。
+
 ## 默认路由表
 
 默认使用 deepseek-official 官方模型（flash / pro），装完在 UI 里改成你自己的 provider 即可。支持任意在「设置 → 模型」里配置过的 provider。
