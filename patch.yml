@@ -1,0 +1,17 @@
+# dsh-delegation-suite bundle layer.
+# Installed via `dsh plugin --profile web add dsh-delegation-suite`.
+# Ranked delegation tool + policy hint + visual route editor.
+
+- insert:
+    - id: delegation-ranker
+      name: 'dsh-delegation-suite/delegation'
+      config:
+        maxDepth: 3
+
+- insert:
+    - id: policy-hint
+      name: 'dsh-delegation-suite/policy-hint'
+
+- insert:
+    - id: preset-studio
+      name: 'dsh-delegation-suite/studio'

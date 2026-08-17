@@ -1,0 +1,28 @@
+{
+  "name": "dsh-delegation-suite",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Ranked subagent delegation for DeepSeek Harness: role-based model routing with failover, per-route reasoning effort, fork delegation, transparent model labels, and a visual route editor in Settings.",
+  "main": "lib/studio.host.js",
+  "exports": {
+    "./delegation": "./lib/delegation.js",
+    "./policy-hint": "./lib/policy-hint.js",
+    "./studio": "./lib/studio.host.js",
+    "./client": "./lib/studio.client.js",
+    "./typert": "./lib/typert.host.js"
+  },
+  "dsh": {
+    "bundle": { "patch": "patch.yml" },
+    "client": { "inject": ["slots", "locale", "connection", "remote"] }
+  },
+  "files": [
+    "lib",
+    "patch.yml",
+    "assets",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": ["deepseek-harness", "dsh", "delegation", "subagent", "routing", "models"],
+  "license": "MIT"
+}
