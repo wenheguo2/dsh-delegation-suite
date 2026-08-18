@@ -40,5 +40,11 @@ for (const sub of ['delegation', 'policy-hint', 'studio']) {
   else console.log('OK  patch row dsh-delegation-suite/' + sub)
 }
 
+// 4. package.json version matches the newest CHANGELOG heading
+const changelog = readFileSync(join(root, 'CHANGELOG.md'), 'utf8')
+const firstVersion = (changelog.match(/^## (\S+)/m) || [])[1]
+if (firstVersion !== pkg.version) fail('CHANGELOG head ' + firstVersion + ' != package.json version ' + pkg.version)
+else console.log('OK  version parity ' + pkg.version)
+
 if (failed) { console.error('\nvalidation failed'); process.exit(1) }
 console.log('\nall checks passed')
