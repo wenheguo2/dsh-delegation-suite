@@ -148,8 +148,14 @@ dsh plugin --profile web add github:wenheguo2/dsh-delegation-suite
 ### Token 用量统计与余额/配额
 
 设置 → Token 统计：
+
+![Token 用量统计](assets/token-usage.png)
+
 - **用量**：本周/本月/年度三个视角，每行一个 provider/模型（请求数、输入、输出、缓存命中、推理 tokens、最后使用时间），顶部合计；可一键清零。数据自动记录（监听每次模型调用），保存在 `$DSH_HOME/data/dsh-delegation-suite/token-stats.json`，升级不丢。
 - **账户余额与配额**：仅显示已配置 API Key 的模型商，每 60 秒自动刷新——
+
+![账户余额与配额](assets/plan-usage.png)
+
   - DeepSeek：总余额/充值余额/赠送余额；
   - Kimi Code：计划用量（5小时/周/月/年窗口）；
   - GLM/ZAI：Coding Plan 配额与标准余额；
