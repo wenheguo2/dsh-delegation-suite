@@ -23,7 +23,13 @@
     "README.md",
     "LICENSE"
   ],
-  "keywords": ["deepseek-harness", "dsh", "delegation", "subagent", "routing", "models"],
+  "keywords": ["deepseek-harness", "dsh", "dsh-plugin", "delegation", "subagent", "routing", "models"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenheguo2/dsh-delegation-suite.git"
+  },
+  "homepage": "https://github.com/wenheguo2/dsh-delegation-suite#readme",
+  "bugs": "https://github.com/wenheguo2/dsh-delegation-suite/issues",
   "peerDependencies": {
     "@deepseek-ai/dsh-tools": ">=0.0.1-rc.1 <0.1.0 || >=0.1.0-rc.1 <0.2.0-0",
     "@deepseek-ai/dsh-subagent": ">=0.0.1-rc.1 <0.1.0 || >=0.1.0-rc.1 <0.2.0-0",
