@@ -9,6 +9,7 @@
     "./delegation": "./lib/delegation.js",
     "./policy-hint": "./lib/policy-hint.js",
     "./studio": "./lib/studio.host.js",
+    "./token-stats": "./lib/token-stats.host.js",
     "./client": "./lib/studio.client.js",
     "./typert": "./lib/typert.host.js"
   },

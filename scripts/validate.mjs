@@ -35,7 +35,7 @@ console.log('OK  package.json manifest')
 
 // 3. Patch rows reference exports subpaths
 const patch = readFileSync(join(root, pkg.dsh.bundle.patch), 'utf8')
-for (const sub of ['delegation', 'policy-hint', 'studio']) {
+for (const sub of ['delegation', 'policy-hint', 'studio', 'token-stats']) {
   if (!patch.includes('dsh-delegation-suite/' + sub)) fail('patch.yml missing row for ' + sub)
   else console.log('OK  patch row dsh-delegation-suite/' + sub)
 }

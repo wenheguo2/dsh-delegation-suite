@@ -1,6 +1,6 @@
 # dsh-delegation-suite bundle layer.
 # Installed via `dsh plugin --profile web add dsh-delegation-suite`.
-# Ranked delegation tool + policy hint + visual route editor.
+# Ranked delegation tool + policy hint + visual route editor + token stats.
 
 - insert:
     - id: delegation-ranker
@@ -15,3 +15,7 @@
 - insert:
     - id: preset-studio
       name: 'dsh-delegation-suite/studio'
+
+- insert:
+    - id: token-stats
+      name: 'dsh-delegation-suite/token-stats'
