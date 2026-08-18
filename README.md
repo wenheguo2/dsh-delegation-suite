@@ -81,20 +81,16 @@
 
 ## 安装
 
-```powershell
-dsh plugin --profile web add dsh-delegation-suite
-```
-
-重启 DSH 后生效。也可以从 GitHub 直接安装：
-
-```powershell
-dsh plugin --profile web add github:wenheguo2/dsh-delegation-suite
-```
-
-或使用预构建 tarball（免 `allowBuilds` 构建授权，推荐）：
+推荐：预构建 tarball（免 `allowBuilds` 构建授权）：
 
 ```powershell
 dsh plugin --profile web add https://github.com/wenheguo2/dsh-delegation-suite/releases/download/v1.0.0/dsh-delegation-suite-1.0.0.tgz
+```
+
+或从 GitHub 源码安装（本包是纯 JavaScript、无构建步骤，源码安装同样开箱即用）：
+
+```powershell
+dsh plugin --profile web add github:wenheguo2/dsh-delegation-suite
 ```
 
 > **注意**：如果你之前手动在 `profiles/web/cordis.patch.yml` 里添加过 `delegation-ranker` / `policy-hint` / `preset-studio` 行，请先删除这些行再安装本包（同名工具/服务重复注册会冲突）。
