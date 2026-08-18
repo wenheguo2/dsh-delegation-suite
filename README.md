@@ -13,7 +13,8 @@
 | **可视化编辑** | 设置 → 预设工作室：路由表每行 provider/模型/强度三列输入框，↑↓ 调优先级、✕ 删除、＋添加、保存即生效（无需重启）；还能编辑自定义预设的名称/描述/人格 |
 | **委派策略提示** | 内置精简策略段，引导主 agent 在合适时机委派、委派后汇报所用模型 |
 | **图片转写（视觉委派）** | 纯文本模型收到图片时，自动派 vision 角色子代理把图片完整转写成文字再继续（走路由表 vision 行 + 失败互备）；在插件设置里可关、可指定专用转写模型、可调超时 |
-| **Token 用量统计** | 自动记录每个 provider/模型 的 token 消耗（本周/本月/本会话），与路由联动——路由表分配了哪些模型、各烧了多少一目了然；数据存本地 |
+| **Token 用量统计** | 自动记录每个 provider/模型 的 token 消耗（本周/本月/年度），与路由联动——路由表分配了哪些模型、各烧了多少一目了然；数据存本地 |
+| **余额与配额（plan 用量）** | 账户余额、各 plan 用量/配额尽力查询：DeepSeek 余额、Kimi Code 计划用量（5小时/周/月/年窗口）、GLM Coding Plan 配额、CodeBuddy 积分（OAuth 登录）、MiMo 本地统计；每 60 秒自动刷新 |
 
 ## 设计特点
 
@@ -144,9 +145,17 @@ dsh plugin --profile web add github:wenheguo2/dsh-delegation-suite
 
 插件设置（设置 → 插件 → dsh-delegation）：可关闭转写（`transcribeEnabled`）、指定专用转写模型（`transcribeModel`，指定后不回退到 vision 表）、调整超时（`transcribeTimeoutMs`）。
 
-### Token 用量统计
+### Token 用量统计与余额/配额
 
-设置 → Token 统计：本周/本月/本会话三个视角，每行一个 provider/模型（请求数、输入、输出、推理 tokens），顶部显示合计；可一键清空。数据自动记录（监听每次模型调用的用量），保存在 `$DSH_HOME/data/dsh-delegation-suite/token-stats.json`，升级不丢。
+设置 → Token 统计：
+- **用量**：本周/本月/年度三个视角，每行一个 provider/模型（请求数、输入、输出、缓存命中、推理 tokens、最后使用时间），顶部合计；可一键清零。数据自动记录（监听每次模型调用），保存在 `$DSH_HOME/data/dsh-delegation-suite/token-stats.json`，升级不丢。
+- **账户余额与配额**：仅显示已配置 API Key 的模型商，每 60 秒自动刷新——
+  - DeepSeek：总余额/充值余额/赠送余额；
+  - Kimi Code：计划用量（5小时/周/月/年窗口）；
+  - GLM/ZAI：Coding Plan 配额与标准余额；
+  - CodeBuddy：积分需网页 OAuth 登录授权（API Key 查不了积分），页面提供一键登录；
+  - MiMo 等无公开配额 API 的厂商：显示本地用量统计。
+  - 查询失败不影响本地用量统计（best-effort）。
 
 ## 常见问题
 
