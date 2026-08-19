@@ -6,6 +6,8 @@
   "description": "Ranked subagent delegation for DeepSeek Harness: role-based model routing with failover, per-route reasoning effort, fork delegation, transparent model labels, and a visual route editor in Settings.",
   "main": "lib/studio.host.js",
   "exports": {
+    ".": "./lib/studio.host.js",
+    "./package.json": "./package.json",
     "./delegation": "./lib/delegation.js",
     "./policy-hint": "./lib/policy-hint.js",
     "./studio": "./lib/studio.host.js",
@@ -15,10 +17,20 @@
   },
   "dsh": {
     "bundle": { "patch": "patch.yml" },
-    "client": { "inject": ["slots", "locale", "connection", "remote"] }
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    }
   },
   "files": [
     "lib",
+    "tools",
     "patch.yml",
     "assets",
     "README.md",

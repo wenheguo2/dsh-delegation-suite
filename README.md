@@ -178,7 +178,7 @@ A：不会。强度注入只作用于子代理；主会话的思考强度由 /mo
 A：分三种情况（子代理强度经 DSH 以标准 `reasoning_effort` / `thinking` 参数发出）：
 - **官方端点**（DeepSeek / Kimi / ZAI·智谱）：生效。实测 DeepSeek `reasoning_effort` 产生 reasoning tokens；Kimi 走 thinking budget（K3 恒思考、budget 微调）；ZAI GLM 的 `thinking` 参数开关灵（enabled 有思考输出 / disabled 无）。
 - **私有网关兼容 OpenAI 格式**：字段会送达，是否生效取决于网关是否透传/解析该字段。腾讯 CodeBuddy 网关实测**忽略 thinking 参数**（GLM 恒定思考）——字段送达但强度档位无效，属网关行为。
-- **网关拒绝 `developer` role**：部分网关（如腾讯 CodeBuddy）的审计会拒绝 OpenAI 的 `developer` role 消息。若你的模型在 DSH 里声明了 `reasoningEfforts`（成为 reasoning 模型），DSH 默认把 system prompt 发为 `developer` role，此类网关会报 `content_filter`。解法：在网关前放一个 developer→system 改写转发器（本机 127.0.0.1 转发，约 60 行 Node 脚本），或改用支持透传的网关（LiteLLM / pi2dsh 路线）。
+- **网关拒绝 `developer` role**：部分网关（如腾讯 CodeBuddy）的审计会拒绝 OpenAI 的 `developer` role 消息。若你的模型在 DSH 里声明了 `reasoningEfforts`（成为 reasoning 模型），DSH 默认把 system prompt 发为 `developer` role，此类网关会报 `content_filter`。解法见随包附带的转发器脚本 [tools/codebuddy-developer-role-forwarder.js](tools/codebuddy-developer-role-forwarder.js)：`node tools/codebuddy-developer-role-forwarder.js` 在本机 8790 端口起一个 developer→system 改写转发器（其余字段原样透传），然后把该网关 provider 的 `baseURL` 指向 `http://127.0.0.1:8790` 即可；或改用支持透传的网关（LiteLLM / pi2dsh 路线）。
 
 ## 许可
 
